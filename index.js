@@ -1,20 +1,32 @@
+const express = require('express');
 const axios = require('axios');
+const app = express();
 
-async function sendFollower(username) {
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('TikTok Takipçi Gönderim Botu Çalışıyor!');
+});
+
+app.post('/send-follower', async (req, res) => {
+  const { username } = req.body;
+
   try {
-    const response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
+    const response = await axios.post('https://api.tiktok.com/follow', {
       username: username,
-      followers: 10, // Örnek bir veri
     });
 
-    if (response.status === 201) {
-      console.log(`${username} adlı kullanıcıya takipçi gönderildi (simüle).`);
+    if (response.data.success) {
+      res.json({ message: `${username} adlı kullanıcıya takipçi gönderildi.` });
     } else {
-      console.log('Bir hata oluştu:', response.data);
+      res.json({ error: response.data.error });
     }
   } catch (error) {
-    console.error('API hatası:', error.message);
+    res.status(500).json({ error: 'API hatası: ' + error.message });
   }
-}
+});
 
-sendFollower('kullanici_adiniz');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Sunucu ${PORT} portunda çalışıyor.`);
+});
