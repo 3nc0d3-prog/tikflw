@@ -1,15 +1,12 @@
 {
   "name": "tiktok-follower-bot",
   "version": "1.0.0",
-  "description": "A simple bot for sending followers on TikTok",
+  "description": "TikTok takipçi gönderim botu",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
-  }
-  "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^1.5.0"
   }
 }
