@@ -1,0 +1,9 @@
+{
+  "name": "tiktok-follower-bot",
+  "version": "1.0.0",
+  "description": "A simple bot for sending followers on TikTok",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
